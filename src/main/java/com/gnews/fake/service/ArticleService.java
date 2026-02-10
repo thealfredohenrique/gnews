@@ -24,6 +24,11 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
+    public List<News> findByTitle(String userInput) {
+        String query = "SELECT * FROM news WHERE title = '" + userInput + "'";
+        return jdbcTemplate.query(query, new NewsRowMapper());
+    }
+
     public ArticlesResponse getTopHeadlines(String category, String lang, String country, String q, int page, int max) {
         Predicate<Article> predicate = article -> true;
 
